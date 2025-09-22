@@ -4,8 +4,34 @@
   const modalRoot = document.getElementById('modalRoot');
   const state = {
     flagsOn: true,
-    theme: 'system',
+    theme: 'system', // 'light' | 'dark' | 'system'
   };
+
+  // Theme handling
+  function systemPrefersDark() {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function applyTheme(theme) {
+    const root = document.documentElement;
+    if (theme === 'dark' || (theme === 'system' && systemPrefersDark())) {
+      root.setAttribute('data-theme', 'dark');
+    } else {
+      root.removeAttribute('data-theme');
+    }
+    const btn = document.getElementById('themeToggle');
+    if (btn) btn.textContent = (root.getAttribute('data-theme') === 'dark') ? '☼' : '☾';
+  }
+  function loadTheme() {
+    try { state.theme = localStorage.getItem('vn-theme') || 'system'; } catch {}
+    applyTheme(state.theme);
+  }
+  function toggleTheme() {
+    const rootIsDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    // Cycle: if currently dark -> light; else -> dark
+    state.theme = rootIsDark ? 'light' : 'dark';
+    try { localStorage.setItem('vn-theme', state.theme); } catch {}
+    applyTheme(state.theme);
+  }
 
   // Simple Router
   function router() {
@@ -71,7 +97,7 @@
         ),
         h('div', { class: 'space' }),
         h('div', { class: 'row' },
-          h('a', { class: 'btn primary', href: `#/story/${s.id}` }, 'Read'),
+          h('a', { class: 'btn primary', href: `#/article/${s.id}` }, 'Read'),
           h('a', { class: 'btn', href: '#/digest' }, 'Open Digest')
         ),
         h('div', { class: 'space' }),
@@ -81,10 +107,23 @@
       )
     ));
 
+    const summaries = h('div', { class: 'card' },
+      h('div', { class: 'section-title' }, 'All Article Summaries'),
+      h('div', { class: 'summary-list' },
+        ...stories.map(s => h('div', { class: 'summary-item' },
+          h('span', { class: 'title' }, s.title),
+          h('span', { class: 'muted' }, ' — '),
+          h('span', {}, s.nutGraf)
+        ))
+      )
+    );
+
     appEl.replaceChildren(
       h('section', {},
         h('div', { class: 'section-title' }, 'Top Stories'),
-        h('div', { class: 'grid grid-3' }, list)
+        h('div', { class: 'grid grid-3' }, list),
+        h('div', { class: 'space' }),
+        summaries
       )
     );
   }
@@ -305,11 +344,19 @@
 
   // Theme toggle (simple)
   const themeBtn = document.getElementById('themeToggle');
-  if (themeBtn) themeBtn.addEventListener('click', () => {
-    document.documentElement.classList.toggle('dark');
-  });
+  if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+
+  // Fake search
+  const searchForm = document.getElementById('searchForm');
+  if (searchForm) {
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Search is still in trial phase.');
+    });
+  }
 
   // Start
+  loadTheme();
   window.addEventListener('hashchange', router);
   router();
 })();

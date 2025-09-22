@@ -15,21 +15,20 @@
   --highlight: #fff3c4; /* soft gold */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0b0f17;
-    --text: #e5e7eb;
-    --muted: #9ca3af;
-    --card: #0f172a;
-    --border: #1f2937;
-    --brand: #f8fafc;
-    --accent: #14b8a6; /* teal-500 brighter in dark */
-    --accent-contrast: #0b0f17;
-    --accent-gold: #e3c24d;
-    --chip: #1f2937;
-    --chip-text: #e5e7eb;
-    --highlight: #3a2f12;
-  }
+/* Manual dark theme override */
+:root[data-theme="dark"] {
+  --bg: #0b0f17;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --card: #0f172a;
+  --border: #1f2937;
+  --brand: #f8fafc;
+  --accent: #14b8a6; /* teal-500 brighter in dark */
+  --accent-contrast: #0b0f17;
+  --accent-gold: #e3c24d;
+  --chip: #1f2937;
+  --chip-text: #e5e7eb;
+  --highlight: #3a2f12;
 }
 
 html, body {
@@ -42,6 +41,10 @@ body {
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: radial-gradient(1200px 600px at 10% -10%, rgba(13,148,136,0.18), transparent),
+                    radial-gradient(800px 400px at 90% 0%, rgba(212,175,55,0.16), transparent),
+                    linear-gradient(180deg, rgba(13,148,136,0.05), rgba(212,175,55,0.05));
+  background-attachment: fixed;
 }
 .container {
   width: min(1120px, 92%);
@@ -76,6 +79,17 @@ body {
   gap: 10px;
   align-items: center;
 }
+.search { display: none; }
+@media (min-width: 700px) { .search { display: block; } }
+.search input {
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 10px;
+  outline: none;
+}
+.greeting { color: var(--muted); margin-left: 6px; font-size: 0.95rem; }
 .nav-link {
   color: var(--text);
   text-decoration: none;
@@ -121,6 +135,9 @@ body {
 .btn.ghost { border-color: transparent; }
 .badge-accent { background: color-mix(in oklab, var(--accent) 18%, white); color: var(--brand); }
 .badge-gold { background: color-mix(in oklab, var(--accent-gold) 35%, white); color: #6b4e00; }
+
+/* Theme icon swap */
+.theme-icon { font-size: 1rem; }
 
 /* App Root */
 .app-root { padding: 18px 0 0; min-height: calc(100vh - 120px); }
@@ -178,6 +195,11 @@ body {
 }
 .highlight { background: var(--highlight); transition: background 0.2s ease; cursor: pointer; }
 .highlight.off { background: transparent; }
+
+/* Summaries */
+.summary-list { display: grid; gap: 8px; }
+.summary-item { display: flex; gap: 8px; align-items: baseline; }
+.summary-item .title { font-weight: 600; }
 
 /* Source list */
 .source-list { display: grid; gap: 10px; }

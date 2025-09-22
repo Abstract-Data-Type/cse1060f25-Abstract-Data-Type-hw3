@@ -66,8 +66,8 @@
         h('h2', { class: 'story-title' }, s.title),
         h('p', { class: 'story-nut' }, s.nutGraf),
         h('div', { class: 'badges' },
-          h('span', { class: 'badge' }, `Coverage: ${s.coverageBar.filter(c => c.covered).length} covered`),
-          h('span', { class: 'badge' }, `Sources: ${s.sourcesSummary.outlets} outlets; ${s.sourcesSummary.primaryDocs} primary docs`)
+          h('span', { class: 'badge badge-accent' }, `Coverage: ${s.coverageBar.filter(c => c.covered).length} covered`),
+          h('span', { class: 'badge badge-gold' }, `Sources: ${s.sourcesSummary.outlets} outlets; ${s.sourcesSummary.primaryDocs} primary docs`)
         ),
         h('div', { class: 'space' }),
         h('div', { class: 'row' },
@@ -84,7 +84,7 @@
     appEl.replaceChildren(
       h('section', {},
         h('div', { class: 'section-title' }, 'Top Stories'),
-        h('div', { class: 'grid' }, list)
+        h('div', { class: 'grid grid-3' }, list)
       )
     );
   }

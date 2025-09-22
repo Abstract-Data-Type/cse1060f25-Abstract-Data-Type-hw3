@@ -5,12 +5,14 @@
   --muted: #475569;
   --card: #f8fafc;
   --border: #e2e8f0;
-  --brand: #111827;
-  --accent: #2563eb;
+  --brand: #0f172a;
+  /* Teal & Gold palette */
+  --accent: #0d9488; /* teal-600 */
   --accent-contrast: #ffffff;
+  --accent-gold: #d4af37; /* gold */
   --chip: #e5e7eb;
-  --chip-text: #111827;
-  --highlight: #fff7cc;
+  --chip-text: #0f172a;
+  --highlight: #fff3c4; /* soft gold */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -21,11 +23,12 @@
     --card: #0f172a;
     --border: #1f2937;
     --brand: #f8fafc;
-    --accent: #60a5fa;
+    --accent: #14b8a6; /* teal-500 brighter in dark */
     --accent-contrast: #0b0f17;
+    --accent-gold: #e3c24d;
     --chip: #1f2937;
     --chip-text: #e5e7eb;
-    --highlight: #2a1f00;
+    --highlight: #3a2f12;
   }
 }
 
@@ -116,6 +119,8 @@ body {
 }
 .btn.primary:hover { filter: brightness(0.95); }
 .btn.ghost { border-color: transparent; }
+.badge-accent { background: color-mix(in oklab, var(--accent) 18%, white); color: var(--brand); }
+.badge-gold { background: color-mix(in oklab, var(--accent-gold) 35%, white); color: #6b4e00; }
 
 /* App Root */
 .app-root { padding: 18px 0 0; min-height: calc(100vh - 120px); }

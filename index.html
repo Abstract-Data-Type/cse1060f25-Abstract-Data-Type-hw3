@@ -1,12 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VeritasNews — Compare Coverage, Sources, Signals</title>
+    <meta name="description" content="VeritasNews: clean, minimalist reader that compares coverage, shows primary sources, and highlights framing signals." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-    <h1>Hello World</h1>
+    <header class="vn-header">
+      <div class="container header-inner">
+        <a class="brand" href="#/">Veritas<span>News</span></a>
+        <nav class="nav">
+          <a href="#/" class="nav-link" data-route>Front Page</a>
+          <a href="#/digest" class="nav-link" data-route>Digest</a>
+          <button id="themeToggle" class="btn btn-ghost" aria-label="Toggle theme">☾</button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="app" class="container app-root" role="main" aria-live="polite">
+      <!-- Routed views will render here by app.js -->
+      <noscript>Please enable JavaScript to use VeritasNews.</noscript>
+    </main>
+
+    <footer class="vn-footer">
+      <div class="container footer-inner">
+        <div>Neutral summaries. Primary sources. Compare coverage.</div>
+        <a href="#/why" class="small-link" id="whyLink">Methodology</a>
+      </div>
+    </footer>
+
+    <div id="modalRoot" aria-hidden="true"></div>
+
+    <script src="./data.js"></script>
+    <script src="./app.js"></script>
 </body>
-</html>     
+</html>
